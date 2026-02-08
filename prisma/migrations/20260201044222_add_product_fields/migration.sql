@@ -5,7 +5,7 @@
 
 */
 -- AlterTable
-ALTER TABLE `product` ADD COLUMN `imageUrl` VARCHAR(191) NULL,
+ALTER TABLE `Product` ADD COLUMN `imageUrl` VARCHAR(191) NULL,
     ADD COLUMN `isActive` BOOLEAN NOT NULL DEFAULT true,
     ADD COLUMN `sku` VARCHAR(191) NULL;
 
