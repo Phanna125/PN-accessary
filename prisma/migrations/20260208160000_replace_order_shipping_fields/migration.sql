@@ -1,5 +1,5 @@
 -- AlterTable
-ALTER TABLE `order`
+ALTER TABLE `Order`
     CHANGE COLUMN `shippingAddressLine1` `shippingStreet` VARCHAR(191) NULL,
     CHANGE COLUMN `shippingAddressLine2` `shippingHouse` VARCHAR(191) NULL,
     CHANGE COLUMN `shippingCity` `shippingCityProvince` VARCHAR(191) NULL,

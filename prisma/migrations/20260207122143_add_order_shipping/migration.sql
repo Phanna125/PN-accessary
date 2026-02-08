@@ -1,5 +1,5 @@
 -- AlterTable
-ALTER TABLE `order` ADD COLUMN `shippingAddressLine1` VARCHAR(191) NULL,
+ALTER TABLE `Order` ADD COLUMN `shippingAddressLine1` VARCHAR(191) NULL,
     ADD COLUMN `shippingAddressLine2` VARCHAR(191) NULL,
     ADD COLUMN `shippingCity` VARCHAR(191) NULL,
     ADD COLUMN `shippingCountry` VARCHAR(191) NULL,
