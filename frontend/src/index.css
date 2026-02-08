@@ -1,0 +1,273 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styling for the whole page */
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+
+  html[data-theme='light'] {
+    color-scheme: light;
+  }
+
+  body {
+    font-family: 'Quicksand', 'Trebuchet MS', sans-serif;
+    @apply bg-night text-white;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+}
+
+/* Reusable lamp styles + animations */
+@layer components {
+  .dark-room {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 20%, rgba(255, 239, 220, 0.08), rgba(3, 4, 12, 0.9));
+    transition: opacity 0.6s ease;
+    z-index: 5;
+    pointer-events: none;
+  }
+
+  .room-off {
+    opacity: 1;
+  }
+
+  .room-on {
+    opacity: 0;
+  }
+
+  .room-particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 8;
+    overflow: hidden;
+  }
+
+  .spark {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 999px;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+    opacity: 0.3;
+    animation: drift 8s ease-in-out infinite;
+  }
+
+  .spark-1 { top: 15%; left: 12%; animation-delay: 0s; }
+  .spark-2 { top: 28%; left: 70%; animation-delay: 1s; }
+  .spark-3 { top: 62%; left: 20%; animation-delay: 2s; }
+  .spark-4 { top: 48%; left: 82%; animation-delay: 3s; }
+  .spark-5 { top: 75%; left: 60%; animation-delay: 4s; }
+  .spark-6 { top: 35%; left: 45%; animation-delay: 5s; }
+  .spark-7 { top: 82%; left: 10%; animation-delay: 6s; }
+  .spark-8 { top: 12%; left: 52%; animation-delay: 7s; }
+  .spark-9 { top: 55%; left: 5%; animation-delay: 8s; }
+  .spark-10 { top: 20%; left: 90%; animation-delay: 9s; }
+
+  .lamp {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 180px;
+    height: 220px;
+    animation: floaty 4s ease-in-out infinite;
+  }
+
+  .lamp-stand {
+    width: 18px;
+    height: 80px;
+    border-radius: 999px;
+    background: #ffe6f1;
+    box-shadow: inset 0 -8px 0 rgba(255, 171, 201, 0.6);
+  }
+
+  .lamp-base {
+    width: 110px;
+    height: 26px;
+    border-radius: 999px;
+    background: #ffd8b5;
+    box-shadow: 0 10px 20px rgba(255, 216, 181, 0.4);
+    margin-top: 6px;
+  }
+
+  .lamp-shade {
+    width: 140px;
+    height: 80px;
+    border-radius: 999px 999px 24px 24px;
+    background: #dcd5ff;
+    box-shadow: inset 0 -10px 0 rgba(166, 155, 255, 0.5);
+    margin-top: 8px;
+    animation: shadeWiggle 6s ease-in-out infinite;
+  }
+
+  .lamp-bulb {
+    position: absolute;
+    top: 70px;
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    background: #fef3c7;
+    box-shadow: inset 0 -5px 0 rgba(255, 205, 121, 0.6);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .lamp-glow {
+    position: absolute;
+    top: 55px;
+    width: 120px;
+    height: 120px;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(255, 235, 171, 0.9), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .lamp-beam {
+    position: absolute;
+    top: 85px;
+    width: 140px;
+    height: 200px;
+    background: radial-gradient(ellipse at top, rgba(255, 240, 200, 0.7), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    filter: blur(2px);
+  }
+
+  .beam-on {
+    opacity: 0.9;
+    animation: beamFlash 0.9s ease-out;
+  }
+
+  /* Hover glow (cute and subtle) */
+  .lamp:hover .lamp-glow {
+    opacity: 0.6;
+  }
+
+  /* Success state makes the lamp "turn on" */
+  .lamp[data-state='on'] .lamp-glow {
+    opacity: 1;
+    animation: glowPulse 1.2s ease-out;
+  }
+
+  .lamp[data-state='on'] .lamp-bulb {
+    transform: scale(1.05);
+    box-shadow: 0 0 18px rgba(255, 216, 140, 0.8);
+  }
+
+  .theme-light .text-white {
+    color: rgb(15 23 42 / 1) !important;
+  }
+
+  .theme-light .text-white\/70 {
+    color: rgb(15 23 42 / 0.7) !important;
+  }
+
+  .theme-light .text-white\/60 {
+    color: rgb(15 23 42 / 0.6) !important;
+  }
+
+  .theme-light .text-white\/50 {
+    color: rgb(15 23 42 / 0.5) !important;
+  }
+
+  .theme-light .text-white\/40 {
+    color: rgb(15 23 42 / 0.4) !important;
+  }
+
+  .theme-light .bg-white\/15 {
+    background-color: rgb(15 23 42 / 0.12) !important;
+  }
+
+  .theme-light .bg-white\/10 {
+    background-color: rgb(15 23 42 / 0.08) !important;
+  }
+
+  .theme-light .bg-white\/5 {
+    background-color: rgb(15 23 42 / 0.05) !important;
+  }
+
+  .theme-light .border-white\/10 {
+    border-color: rgb(15 23 42 / 0.2) !important;
+  }
+
+  .theme-light .hover\:text-white:hover {
+    color: rgb(15 23 42 / 1) !important;
+  }
+
+  .theme-light .hover\:bg-white\/10:hover {
+    background-color: rgb(15 23 42 / 0.12) !important;
+  }
+
+  .theme-light .hover\:bg-white\/20:hover {
+    background-color: rgb(15 23 42 / 0.2) !important;
+  }
+}
+
+@keyframes glowPulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.4;
+  }
+  60% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+}
+
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes shadeWiggle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(1.5deg);
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-20px) translateX(10px);
+  }
+}
+
+@keyframes beamFlash {
+  0% {
+    opacity: 0;
+    transform: scaleY(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+  100% {
+    opacity: 0.8;
+    transform: scaleY(1.02);
+  }
+}
