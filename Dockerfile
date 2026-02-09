@@ -2,6 +2,9 @@ FROM node:22.12.0-bookworm-slim AS build
 
 WORKDIR /app
 
+ARG BUILD_DATABASE_URL="mysql://build:build@127.0.0.1:3306/build"
+ENV DATABASE_URL=${BUILD_DATABASE_URL}
+
 COPY package*.json ./
 COPY prisma ./prisma
 COPY prisma.config.ts ./
