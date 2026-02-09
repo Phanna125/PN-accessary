@@ -1,28 +1,39 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Sora:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Base styling for the whole page */
 @layer base {
   html {
-    color-scheme: dark;
-  }
-
-  html[data-theme='light'] {
     color-scheme: light;
   }
 
+  html[data-theme='dark'] {
+    color-scheme: dark;
+  }
+
   body {
-    font-family: 'Quicksand', 'Trebuchet MS', sans-serif;
-    @apply bg-night text-white;
+    font-family: 'Sora', 'Trebuchet MS', sans-serif;
+    @apply bg-[#edf1f6] text-slate-900;
     transition: background-color 0.25s ease, color 0.25s ease;
   }
 }
 
-/* Reusable lamp styles + animations */
 @layer components {
+  .font-display {
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    letter-spacing: 0.03em;
+  }
+
+  .pn-panel-enter {
+    animation: panelRise 0.65s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  .stagger-fade {
+    animation: fadeSlide 0.6s ease both;
+  }
+
   .dark-room {
     position: absolute;
     inset: 0;
@@ -147,12 +158,10 @@
     animation: beamFlash 0.9s ease-out;
   }
 
-  /* Hover glow (cute and subtle) */
   .lamp:hover .lamp-glow {
     opacity: 0.6;
   }
 
-  /* Success state makes the lamp "turn on" */
   .lamp[data-state='on'] .lamp-glow {
     opacity: 1;
     animation: glowPulse 1.2s ease-out;
@@ -209,6 +218,28 @@
 
   .theme-light .hover\:bg-white\/20:hover {
     background-color: rgb(15 23 42 / 0.2) !important;
+  }
+}
+
+@keyframes panelRise {
+  0% {
+    opacity: 0;
+    transform: translateY(22px) scale(0.99);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

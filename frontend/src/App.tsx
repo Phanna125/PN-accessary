@@ -17,7 +17,7 @@ function App() {
   const isAuthRoute = location.pathname.startsWith('/auth')
   const [theme, setTheme] = useState<ThemeMode>(() => {
     const saved = localStorage.getItem('store_theme')
-    return saved === 'light' ? 'light' : 'dark'
+    return saved === 'dark' ? 'dark' : 'light'
   })
   const [user, setUser] = useState<{ email: string; role: string } | null>(null)
   const [authError, setAuthError] = useState<string | null>(null)
@@ -78,13 +78,20 @@ function App() {
     return element
   }
 
+  const showNavbar =
+    !isAuthRoute &&
+    authState === 'authenticated' &&
+    location.pathname !== '/'
+
   return (
     <div
       className={`min-h-screen transition-colors duration-300 ${
-        theme === 'dark' ? 'theme-dark bg-slate-950 text-white' : 'theme-light bg-slate-100 text-slate-900'
+        theme === 'dark'
+          ? 'theme-dark bg-slate-950 text-slate-100'
+          : 'theme-light bg-[#edf1f6] text-slate-900'
       }`}
     >
-      {!isAuthRoute && authState === 'authenticated' ? (
+      {showNavbar ? (
         <Navbar
           user={user}
           authLabel={authError}
@@ -96,7 +103,7 @@ function App() {
         />
       ) : null}
 
-      <main className="min-h-[calc(100vh-72px)]">
+      <main className={showNavbar ? 'min-h-[calc(100vh-72px)]' : 'min-h-screen'}>
         <Routes>
           <Route path="/" element={protectedElement(<ProductsPage />)} />
           <Route

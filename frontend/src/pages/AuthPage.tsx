@@ -177,11 +177,11 @@ export function AuthPage() {
         <section className="order-2 flex flex-col justify-center gap-6 sm:gap-8 lg:order-1">
           <div className="inline-flex w-fit items-center gap-3 rounded-full bg-white/70 px-4 py-2 text-sm font-semibold text-ink shadow-soft">
             <span className="h-2.5 w-2.5 rounded-full bg-mint" />
-            Cute Store Portal
+            PN-Accessory Access
           </div>
 
           <h1 className="text-3xl font-bold leading-tight text-night sm:text-5xl">
-            Welcome back. Let's light up your store.
+            Welcome back to PN-Accessory.
           </h1>
           <p className="max-w-xl text-base text-ink/70 sm:text-lg">
             Pastel vibes, gentle animations, and a friendly login flow. Hover the

@@ -1,0 +1,17 @@
+<svg width="220" height="220" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="220" height="220" rx="40" fill="#0A0A0A"/>
+  <g filter="url(#shadow)">
+    <path d="M48 64H108C126.8 64 142 79.2 142 98V116H120V100C120 90.1 111.9 82 102 82H68V142L48 156V64Z" fill="#EEF0F3"/>
+    <path d="M75 102H123V119H75V102Z" fill="#D9DDE2"/>
+    <path d="M85 131H107V156H85V131Z" fill="#D9DDE2"/>
+    <path d="M131 72H151V122L179 156H155L131 124V72Z" fill="#E7EAF0"/>
+    <path d="M173.5 60L176.6 69.4L186 72.5L176.6 75.6L173.5 85L170.4 75.6L161 72.5L170.4 69.4L173.5 60Z" fill="#F5F6F8"/>
+    <ellipse cx="117" cy="93" rx="32" ry="13" transform="rotate(-20 117 93)" stroke="#F0F2F6" stroke-width="8"/>
+    <ellipse cx="117" cy="93" rx="32" ry="13" transform="rotate(-20 117 93)" stroke="#7B8290" stroke-width="2"/>
+  </g>
+  <defs>
+    <filter id="shadow" x="36" y="48" width="160" height="124" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+</svg>

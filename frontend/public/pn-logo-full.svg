@@ -1,0 +1,18 @@
+<svg width="780" height="280" viewBox="0 0 780 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="780" height="280" rx="36" fill="#0A0A0A"/>
+  <g filter="url(#soft)">
+    <path d="M160 70H290C322.6 70 349 96.4 349 129V166H310V132C310 117.7 298.3 106 284 106H199V178L160 205V70Z" fill="#ECEEF2"/>
+    <path d="M214 135H316V168H214V135Z" fill="#D9DDE2"/>
+    <path d="M235 186H274V223H235V186Z" fill="#D9DDE2"/>
+    <path d="M330 88H369V186L429 223H379L330 174V88Z" fill="#EAECF1"/>
+    <path d="M424 74L430.1 92.5L448.6 98.6L430.1 104.7L424 123.2L417.9 104.7L399.4 98.6L417.9 92.5L424 74Z" fill="#F4F5F7"/>
+    <ellipse cx="302" cy="127" rx="58" ry="23" transform="rotate(-19 302 127)" stroke="#F0F2F6" stroke-width="14"/>
+    <ellipse cx="302" cy="127" rx="58" ry="23" transform="rotate(-19 302 127)" stroke="#6E7584" stroke-width="3"/>
+  </g>
+  <text x="390" y="236" text-anchor="middle" fill="#F3F4F6" font-family="Sora, Arial, sans-serif" font-size="66" font-weight="700" letter-spacing="2">PN-Accessory</text>
+  <defs>
+    <filter id="soft" x="145" y="56" width="320" height="182" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+</svg>
