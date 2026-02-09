@@ -111,7 +111,7 @@ export function AuthPage() {
       if (!response.ok) {
         const message = Array.isArray(data?.message)
           ? data.message.join(', ')
-          : data?.message ?? 'Something went wrong'
+          : data?.message ?? `Request failed (HTTP ${response.status})`
         throw new Error(message)
       }
       if (!data) {

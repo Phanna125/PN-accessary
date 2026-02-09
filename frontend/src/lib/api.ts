@@ -75,7 +75,7 @@ export async function apiGet<T>(path: string, useAuth = false) {
   })
   const data = await parseBody<T>(response)
   if (!response.ok) {
-    throw new Error(getErrorMessage(data, 'Request failed'))
+    throw new Error(getErrorMessage(data, `Request failed (HTTP ${response.status})`))
   }
   return (data as T) ?? ({} as T)
 }
@@ -92,7 +92,7 @@ export async function apiPost<T>(
   })
   const data = await parseBody<T>(response)
   if (!response.ok) {
-    throw new Error(getErrorMessage(data, 'Request failed'))
+    throw new Error(getErrorMessage(data, `Request failed (HTTP ${response.status})`))
   }
   return (data as T) ?? ({} as T)
 }
@@ -109,7 +109,7 @@ export async function apiPatch<T>(
   })
   const data = await parseBody<T>(response)
   if (!response.ok) {
-    throw new Error(getErrorMessage(data, 'Request failed'))
+    throw new Error(getErrorMessage(data, `Request failed (HTTP ${response.status})`))
   }
   return (data as T) ?? ({} as T)
 }
@@ -121,7 +121,7 @@ export async function apiDelete<T>(path: string, useAuth = false) {
   })
   const data = await parseBody<T>(response)
   if (!response.ok) {
-    throw new Error(getErrorMessage(data, 'Request failed'))
+    throw new Error(getErrorMessage(data, `Request failed (HTTP ${response.status})`))
   }
   return (data as T) ?? ({} as T)
 }
@@ -136,7 +136,7 @@ export async function apiUpload(path: string, file: File) {
   })
   const data = await parseBody<{ url?: string; message?: string }>(response)
   if (!response.ok) {
-    throw new Error(getErrorMessage(data, 'Upload failed'))
+    throw new Error(getErrorMessage(data, `Upload failed (HTTP ${response.status})`))
   }
   if (!data?.url) throw new Error('Upload failed')
   return data.url
