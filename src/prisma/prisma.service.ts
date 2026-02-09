@@ -1,7 +1,6 @@
 import { Injectable, OnModuleInit,OnModuleDestroy  } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 import { PrismaMariaDb } from '@prisma/adapter-mariadb';
-import type { PoolConfig } from 'mariadb';
 
 function fromMysqlParts() {
   const host = process.env.MYSQLHOST ?? process.env.MYSQL_HOST;
@@ -40,26 +39,7 @@ export class PrismaService
       );
     }
 
-    const url = new URL(dbUrl);
-
-    const allowPublicKeyRetrieval =
-      url.searchParams.get('allowPublicKeyRetrieval') === 'true';
-    const sslParam = url.searchParams.get('ssl');
-    const ssl =
-      sslParam === null ? undefined : sslParam !== 'false';
-
-    const poolConfig: PoolConfig = {
-      host: url.hostname,
-      port: url.port ? Number(url.port) : 3306,
-      user: decodeURIComponent(url.username),
-      password: decodeURIComponent(url.password),
-      database: url.pathname.replace('/', ''),
-      connectionLimit: 5,
-      ...(allowPublicKeyRetrieval ? { allowPublicKeyRetrieval: true } : {}),
-      ...(sslParam !== null ? { ssl } : {}),
-    };
-
-    const adapter = new PrismaMariaDb(poolConfig);
+    const adapter = new PrismaMariaDb(dbUrl);
     super({ adapter });
   }
 
