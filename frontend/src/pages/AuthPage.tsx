@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { getApiBase } from '../lib/api'
 
 type AuthMode = 'login' | 'register'
 
@@ -9,9 +10,18 @@ type AuthResponse = {
   message?: string | string[]
 }
 
-const API_BASE =
-  (import.meta.env.VITE_API_BASE_URL as string | undefined) ??
-  'http://localhost:3000'
+const API_BASE = getApiBase()
+
+async function parseBody<T>(response: Response): Promise<T | undefined> {
+  const raw = await response.text()
+  if (!raw.trim()) return undefined
+
+  try {
+    return JSON.parse(raw) as T
+  } catch {
+    return undefined
+  }
+}
 
 export function AuthPage() {
   const navigate = useNavigate()
@@ -97,12 +107,15 @@ export function AuthPage() {
         body: JSON.stringify(payload),
       })
 
-      const data = (await response.json()) as AuthResponse
+      const data = await parseBody<AuthResponse>(response)
       if (!response.ok) {
         const message = Array.isArray(data?.message)
           ? data.message.join(', ')
           : data?.message ?? 'Something went wrong'
         throw new Error(message)
+      }
+      if (!data) {
+        throw new Error('Server returned an empty response')
       }
 
       setResult(data)

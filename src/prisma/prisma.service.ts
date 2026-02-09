@@ -8,10 +8,16 @@ export class PrismaService
   extends PrismaClient
   implements OnModuleInit, OnModuleDestroy {
   constructor() {
-    const dbUrl = process.env.DATABASE_URL;
+    const dbUrl =
+      process.env.DATABASE_URL ??
+      process.env.MYSQL_URL ??
+      process.env.MYSQL_PRIVATE_URL ??
+      process.env.MYSQL_PUBLIC_URL;
+
     if (!dbUrl) {
-      // Fail fast if .env not loaded
-      throw new Error('DATABASE_URL is missing. Check your .env file.');
+      throw new Error(
+        'Database URL is missing. Set DATABASE_URL or Railway MySQL vars (MYSQL_URL / MYSQL_PRIVATE_URL / MYSQL_PUBLIC_URL).',
+      );
     }
 
     const url = new URL(dbUrl);
