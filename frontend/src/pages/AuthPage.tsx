@@ -33,7 +33,6 @@ export function AuthPage() {
   // Simple inputs
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [role] = useState<'CUSTOMER' | 'ADMIN'>('CUSTOMER')
 
   // UI state
   const [loading, setLoading] = useState(false)
@@ -96,10 +95,7 @@ export function AuthPage() {
 
     try {
       // Our backend expects "email", so we map username -> email for now.
-      const payload =
-        mode === 'login'
-          ? { email: username, password }
-          : { email: username, password, role }
+      const payload = { email: username, password }
 
       const response = await fetch(endpoint, {
         method: 'POST',
