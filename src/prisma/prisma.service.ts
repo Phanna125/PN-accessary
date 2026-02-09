@@ -1,4 +1,4 @@
-import { Injectable, OnModuleInit,OnModuleDestroy  } from '@nestjs/common';
+import { Injectable, Logger, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 import { PrismaMariaDb } from '@prisma/adapter-mariadb';
 
@@ -30,6 +30,8 @@ function resolveDatabaseUrl() {
 export class PrismaService
   extends PrismaClient
   implements OnModuleInit, OnModuleDestroy {
+  private readonly logger = new Logger(PrismaService.name);
+
   constructor() {
     const dbUrl = resolveDatabaseUrl();
 
@@ -44,7 +46,13 @@ export class PrismaService
   }
 
   async onModuleInit() {
-    await this.$connect();
+    try {
+      await this.$connect();
+    } catch (error) {
+      this.logger.error(
+        `Initial Prisma connection failed: ${error instanceof Error ? error.message : String(error)}`,
+      );
+    }
   }
 
   async onModuleDestroy() {
